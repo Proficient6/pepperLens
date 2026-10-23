@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>PepperLens — a closer look at leaf health</title>
+  <meta name="description" content="Bell pepper leaf classification through digital image processing. Explore seven trained models, each processing stage, and the complete training report.">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#lab" aria-label="PepperLens home"><span class="brand-mark"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M25 5C10 3 3 11 8 23c12 5 20-3 17-18Z"/><path d="m6 27 15-16m-8 8-1-8m6 3 7 1"/></svg></span><span>PepperLens<small>A DIGITAL IMAGE PROCESSING LAB</small></span></a>
+    <nav aria-label="Main navigation"><a href="#lab" class="nav-link active" data-view="lab">Leaf lab</a><a href="#training" class="nav-link" data-view="training">Training report</a><a href="#dsp" class="nav-link" data-view="dsp">The DSP behind it <span aria-hidden="true">↗</span></a></nav>
+    <span class="connection" id="connection"><span class="status-dot"></span>Connecting to model</span>
+  </header>
+
+  <main>
+    <div id="connection-error" class="notice error" role="alert" hidden><span id="connection-message"></span> <button id="retry-connection" type="button" class="text-button" style="margin-left:12px;text-decoration:underline">Check connection</button></div>
+    <section id="view-lab" class="view">
+      <div class="hero">
+        <div><p class="eyebrow"><span class="tiny-leaf">✳</span> COLOUR. TEXTURE. SHAPE.</p><h1>Every leaf has<br>a <em>signal.</em></h1><p class="hero-copy">A closer look at bell pepper leaf health, through<br class="desktop-break"> digital image processing and seven trained classifiers.</p></div>
+        <div class="hero-facts"><div><span class="fact-value" data-field="test-accuracy">—</span><span class="fact-label">Internal test accuracy</span></div><div><span class="fact-value">6<span class="fact-unit"> conditions</span></span><span class="fact-label">One focused bell pepper model</span></div><a href="#training">Explore the training results <span>↗</span></a></div>
+      </div>
+      <div class="lab-grid">
+        <section class="card upload-card" aria-labelledby="upload-title">
+          <div class="card-heading"><div><span class="step-number">01</span><h2 id="upload-title">Meet your leaf</h2></div><span class="tag">YOUR IMAGE</span></div>
+          <input type="file" id="leaf-file" accept="image/*" hidden>
+          <button id="drop-zone" class="drop-zone" type="button" aria-label="Choose or drop a bell pepper leaf image">
+            <span id="upload-prompt"><span class="upload-icon"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 31V10m-7 7 7-7 7 7M10 29v10h28V29"/><path d="M9 16H5V5h11m16 0h11v11" opacity=".35"/></svg></span><strong>Drop a bell pepper leaf here</strong><span>or <u>browse your files</u></span><small>JPG, PNG or WebP · up to 15 MB</small></span>
+            <img id="leaf-preview" alt="Selected bell pepper leaf" hidden>
+            <span id="preview-overlay" hidden>Click to choose another image</span>
+          </button>
+          <div class="file-meta"><span id="file-name">One clear leaf. A simple background.</span><button id="clear-file" class="text-button" type="button" hidden>Remove</button></div>
+          <button id="analyze" class="primary-button" disabled><span id="analyze-label">Analyze leaf</span><span aria-hidden="true">↗</span></button>
+          <p class="upload-note"><span aria-hidden="true">⌁</span> Your photo is processed locally and is not saved by the app.</p>
+          <div id="upload-error" class="notice error" role="alert" hidden></div>
+        </section>
+
+        <section class="card result-card" aria-labelledby="result-heading" aria-live="polite">
+          <div class="card-heading"><div><span class="step-number">02</span><h2 id="result-heading">Read the signal</h2></div><span class="tag green" id="main-model">VALIDATION-SELECTED MODEL</span></div>
+          <div id="result-empty" class="result-empty"><svg class="botanical" viewBox="0 0 200 180" aria-hidden="true"><path d="M100 156C52 143 31 106 51 51c54-4 90 30 49 105Z" fill="#dce4cb"/><path d="M99 154c-2-76 21-117 66-125 22 63-1 111-66 125Z" fill="#b9c79c"/><path d="M96 169C78 116 70 94 59 71m39 95c15-55 33-94 53-121m-42 83 35-7m-24-18 30-9M87 139l-24-17" fill="none" stroke="#3d5b3a" stroke-width="2.5" stroke-linecap="round"/><circle cx="172" cy="149" r="3" fill="#d0a672"/><circle cx="33" cy="95" r="2" fill="#aebc9a"/></svg><h3>532 signals. One leaf.</h3><p>Upload a photo to explore what its colour,<br>texture and shape can tell us.</p><div class="empty-pills"><span>Colour · 512</span><span>Texture · 13</span><span>Shape · 7</span></div></div>
+          <div id="result-content" hidden></div>
+          <div class="result-footnote"><span class="status-dot"></span><span id="model-note">Loading the saved Colab model…</span></div>
+        </section>
+      </div>
+      <div class="supported"><span>TRAINED CONDITIONS</span><div id="condition-chips"></div></div>
+      <p class="scope-note">Use a bell pepper leaf from one of these six classes. The model does not verify crop identity or recognize every possible condition. Field accuracy has not been measured.</p>
+      <div id="prediction-workspace" hidden>
+        <section class="section-block"><div class="section-title"><div><p class="eyebrow">SEVEN PERSPECTIVES</p><h2>What each classifier sees.</h2></div><button id="download-prediction" class="secondary-button">Download prediction <span>↓</span></button></div><div class="card table-card"><div class="table-scroll"><table><thead><tr><th>Classifier</th><th>This leaf’s prediction</th><th>Model confidence*</th><th>Saved test accuracy</th></tr></thead><tbody id="prediction-rows"></tbody></table></div><p class="table-note" id="agreement-note"></p></div><p class="scope-note">* Uncalibrated class scores. Values from different algorithms are not directly comparable. SVM has no probability score. Test accuracy is measured on labelled test images, not on this uploaded photograph.</p></section>
+        <section class="section-block"><div class="section-title"><div><p class="eyebrow">THE IMAGE, UNPACKED</p><h2>Follow every processing step.</h2></div><span id="processing-meta" class="muted"></span></div><div class="filter-tabs" role="group" aria-label="Filter processing stages"><button class="active" data-stage-group="all">All stages</button><button data-stage-group="colour">Colour & filtering</button><button data-stage-group="mask">Segmentation</button><button data-stage-group="diagnostic">Edges & frequency</button></div><div id="stage-grid" class="stage-grid"></div><p id="coverage-note" class="scope-note"></p></section>
+        <section class="section-block"><div class="section-title"><div><p class="eyebrow">DIGITAL SIGNAL PROCESSING</p><h2>From pixels to frequencies.</h2></div><span class="tag">THIS UPLOADED LEAF</span></div><div id="prediction-figures" class="figure-grid"></div><details class="card descriptors"><summary>Inspect the 532 extracted features <span>+</span></summary><div id="feature-tables"></div></details></section>
+      </div>
+      <div class="method-strip"><span class="method-symbol">∿</span><div><strong>Image processing first. Machine learning next.</strong><p>Gaussian smoothing → HSV segmentation → colour, texture and shape descriptors → classification.</p></div><a href="#dsp" aria-label="Read about the digital signal processing">Explore the method ↗</a></div>
+    </section>
+
+    <section id="view-training" class="view" hidden>
+      <div class="report-hero"><div><p class="eyebrow">YOUR COMPLETED COLAB EXPERIMENT</p><h1>The experiment,<br><em>in full.</em></h1><p class="hero-copy">The measured results from your saved six-class run.<br>Models, cleaning decisions and every original figure.</p></div><a href="/api/reports.zip" class="secondary-button download-reports">Download all reports <span>↓</span></a></div>
+      <div id="training-kpis" class="kpi-grid"></div>
+      <div class="notice subtle">These are internal grouped-holdout results. Source-image and augmentation lineage was not independently reviewed; duplicate hashing cannot establish complete independence. Field performance remains unmeasured.</div>
+      <section class="section-block"><div class="section-title"><div><p class="eyebrow">A FAIR COMPARISON</p><h2>Seven models. The same split.</h2></div><span class="tag green">SELECTED ON VALIDATION</span></div><div class="card benchmark-card"><div class="chart-heading"><h3>Balanced accuracy by classifier</h3><div class="legend"><span><i class="validation"></i>Validation</span><span><i class="test"></i>Test</span></div></div><div id="benchmark-bars"></div><div class="axis-labels"><span>0%</span><span>25%</span><span>50%</span><span>75%</span><span>100%</span></div><p class="table-note">Balanced accuracy averages recall across the six classes. Model selection used validation balanced accuracy before any test predictions.</p></div><div class="card table-card full-comparison"><div class="table-scroll"><table><thead><tr><th>Classifier</th><th>Validation balanced</th><th>Validation macro F1</th><th>Test accuracy</th><th>Test balanced</th><th>Test macro F1</th></tr></thead><tbody id="comparison-rows"></tbody></table></div></div></section>
+      <section class="section-block"><div class="section-title"><div><p class="eyebrow">WHERE THE MODELS SUCCEEDED</p><h2>A closer look at each class.</h2></div><label class="select-label">Inspect classifier<select id="report-model" aria-label="Classifier for confusion matrix and class metrics"></select></label></div><div class="performance-grid"><div class="card matrix-card"><h3 id="matrix-title">Confusion matrix</h3><p class="muted">Rows = actual condition · columns = predicted condition</p><div class="matrix-scroll"><div id="confusion-matrix"></div></div></div><div class="card class-metrics"><h3>Precision, recall & F1</h3><div class="table-scroll"><table><thead><tr><th>Condition</th><th>Precision</th><th>Recall</th><th>F1</th><th>Support</th></tr></thead><tbody id="class-metric-rows"></tbody></table></div><div id="model-summary" class="mini-stats"></div></div></div></section>
+      <section class="section-block"><div class="section-title"><div><p class="eyebrow">THE DATA BEHIND THE SCORE</p><h2>Cleaned, counted, kept apart.</h2></div><span class="tag">SOURCE IMAGES PRESERVED</span></div><div id="audit-flow" class="audit-flow"></div><div class="performance-grid"><div class="card dataset-card"><h3>Retained class distribution</h3><div id="class-distribution"></div></div><div class="card dataset-card"><h3>Grouped partitions</h3><div id="split-chart"></div><div class="table-scroll"><table><thead><tr><th>Condition</th><th>Train</th><th>Validation</th><th>Test</th></tr></thead><tbody id="split-rows"></tbody></table></div><p id="feature-failure-note" class="table-note"></p></div></div></section>
+      <section class="section-block"><div class="section-title"><div><p class="eyebrow">AS GENERATED IN YOUR NOTEBOOK</p><h2>Your original training figures.</h2></div><span class="muted">Click any figure to enlarge</span></div><div id="training-figures" class="figure-grid original-figures"></div></section>
+      <section class="section-block"><div class="section-title"><div><p class="eyebrow">REPRODUCIBILITY</p><h2>The numbers, without the gloss.</h2></div></div><div id="extra-statistics" class="card extra-statistics"></div><details class="card descriptors"><summary>Download individual audit files and statistics <span>+</span></summary><div id="report-files" class="report-files"></div></details></section>
+    </section>
+
+    <section id="view-dsp" class="view" hidden>
+      <div class="report-hero"><div><p class="eyebrow">THE COURSEWORK AT ITS CORE</p><h1>A leaf is a<br><em>2-D signal.</em></h1><p class="hero-copy">Before a model predicts, signal processing makes the<br>photograph measurable. Here is the complete path.</p></div><div class="formula-card"><span>THE CLASSIFIER INPUT</span><strong>512 + 13 + 7</strong><p>colour + texture + shape<br><b>532 numerical descriptors</b></p></div></div>
+      <div id="dsp-pipeline" class="dsp-pipeline"></div>
+      <section class="card dsp-explanation"><p class="eyebrow">CONVOLUTION IN ACTION</p><h2>The Gaussian is our low-pass filter.</h2><p>A normalized 3 × 3 Gaussian kernel, with σ = 0.7 pixels, forms a weighted neighbourhood sum. It attenuates high spatial frequencies before HSV thresholding and texture extraction. The filter-response plot connects the spatial operation to its frequency-domain behaviour.</p><div class="formula">y[m,n] = Σᵢ Σⱼ h[i,j] · x[m−i,n−j]</div><p>Image frequency is measured in cycles per pixel, with Nyquist at 0.5. Sobel edges and Fourier spectra are visual diagnostics; they do not add classifier features. BGR↔RGB reorders channels, while RGB→HSV transforms the colour coordinates.</p></section>
+      <div id="dsp-saved-figures" class="figure-grid section-block"></div>
+      <div class="method-strip"><span class="method-symbol">↗</span><div><strong>See the DSP on your own photograph.</strong><p>The Leaf lab generates fresh processing stages, histograms and filter-analysis plots for every upload.</p></div><a href="#lab">Open Leaf lab ↗</a></div>
+    </section>
+  </main>
+  <footer><a class="footer-brand" href="#lab">PepperLens<span> / DSP LEAF LAB</span></a><p>Bell pepper leaf classification · Six trained conditions · Seven perspectives</p><span>Built from your saved experiment.</span></footer>
+  <dialog id="image-dialog"><div class="dialog-toolbar"><span id="dialog-title"></span><a id="dialog-download" download="PepperLens_figure.png" class="text-button">Download PNG ↓</a><button id="close-dialog" aria-label="Close enlarged figure">×</button></div><img id="dialog-image" alt="Enlarged processing or training figure"></dialog>
+  <script src="/app.js" defer></script>
+</body>
+</html>

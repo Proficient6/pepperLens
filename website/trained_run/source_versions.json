@@ -1,0 +1,11 @@
+{
+  "cloud_data.py": "0c0a83d82d7e8214e5aac925df3463796b7ff1532784e89a0c11f17dd8438881",
+  "fetch_mendeley.py": "54ee5e296fbdb68a6f3b3d2d7d4620422f0febe4eba202977d5152ab1c91d6f4",
+  "fetch_plantvillage.py": "dc94de7f7c3b947ac36713bba439d62b7fed4cd2265d4421329334437aa30138",
+  "pepper_model.py": "6853acab0b3eed29d0bb18f762d498a5a5c51952d875ae076eaf2ec93d3b0db5",
+  "notebook_ui.py": "c8fbbcefd483ae32e51ca26d56eaa458a9ef796569866e86a86cbfc850b78945",
+  "dsp_walkthrough.py": "a9cb068f89505e09d42262fbc0e33b18babbddba9de1f4fbcae4dc9f68a655c8",
+  "app.py": "48b448887f06f47b3151bfccf5c009614ca049e692ad021f0fee1c7ef8592571",
+  "predict.py": "0e185f2ef138995594ee2821eaf8813d56a46e1b3117c4f5cf771f99abf741ee",
+  "requirements.txt": "4faa4c2fce8595eabbad96049a79f05838cb2fa9bb6a9a61cba73aa9ecbfa3ef"
+}

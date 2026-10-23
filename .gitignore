@@ -1,0 +1,38 @@
+# Local Python environments (install from requirements-tested.txt instead)
+.venv/
+venv/
+env/
+
+# Generated Python / notebook / test caches
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Local screenshots, test output, logs and downloaded archives
+website/runtime/
+/test_outputs/
+*.log
+*.zip
+
+# Downloaded datasets and superseded development model folders
+/data/
+/artifacts/
+/artifacts_all_models/
+
+# Local credentials; a placeholder-only example may be committed
+.env
+.env.*
+!.env.example
+
+# Operating-system generated files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Important: keep the final .ipynb and website/trained_run/ in Git.
+# The .joblib model, CSV/JSON reports and PNG figures are project deliverables.

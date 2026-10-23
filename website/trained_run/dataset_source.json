@@ -1,0 +1,13 @@
+{
+  "source": "https://data.mendeley.com/datasets/w9drvtxg9g/1",
+  "task": "multiclass",
+  "measured_file_counts": {
+    "bacterial_spot": 4901,
+    "healthy": 1524,
+    "cercospora_leaf_spot": 1796,
+    "leaf_curl": 423,
+    "nutrient_deficiency": 444,
+    "powdery_mildew": 195
+  },
+  "parent_groups": "Not inferred; review required for independent evaluation"
+}

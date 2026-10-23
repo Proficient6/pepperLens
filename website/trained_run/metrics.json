@@ -1,0 +1,1698 @@
+{
+  "feature_version": "rgb-hsv-masked-532-v1",
+  "bundle_version": 3,
+  "labels": [
+    "bacterial_spot",
+    "cercospora_leaf_spot",
+    "healthy",
+    "leaf_curl",
+    "nutrient_deficiency",
+    "powdery_mildew"
+  ],
+  "selected_model": "Random Forest",
+  "selection_metric": "validation_balanced_accuracy",
+  "selection_score": 0.9924625763030063,
+  "primary_prediction_rule": "Use the individual model selected on validation; no test-based selection",
+  "model_names": [
+    "Logistic Regression",
+    "Linear Discriminant Analysis",
+    "K-Nearest Neighbors",
+    "Decision Tree",
+    "Random Forest",
+    "Gaussian Naive Bayes",
+    "Support Vector Machine"
+  ],
+  "ensemble_rule": "Equal hard vote; strict majority required",
+  "split_counts": {
+    "bacterial_spot": {
+      "test": 811,
+      "train": 2455,
+      "validation": 798
+    },
+    "cercospora_leaf_spot": {
+      "test": 315,
+      "train": 925,
+      "validation": 316
+    },
+    "healthy": {
+      "test": 296,
+      "train": 924,
+      "validation": 304
+    },
+    "leaf_curl": {
+      "test": 82,
+      "train": 256,
+      "validation": 85
+    },
+    "nutrient_deficiency": {
+      "test": 95,
+      "train": 261,
+      "validation": 88
+    },
+    "powdery_mildew": {
+      "test": 37,
+      "train": 118,
+      "validation": 40
+    }
+  },
+  "unique_images": 8206,
+  "feature_failures": 1,
+  "data_audit": {
+    "conflict_policy": "exclude",
+    "readable_files_before_cleanup": 9283,
+    "unreadable_files": 0,
+    "conflicting_image_groups": 16,
+    "conflicting_files_detected": 48,
+    "conflicting_files_excluded": 48,
+    "counts_before_cleanup": {
+      "bacterial_spot": 4901,
+      "cercospora_leaf_spot": 1796,
+      "healthy": 1524,
+      "leaf_curl": 423,
+      "nutrient_deficiency": 444,
+      "powdery_mildew": 195
+    },
+    "same_label_duplicate_copies_removed": 1029,
+    "retained_unique_images": 8206,
+    "counts_after_cleanup": {
+      "bacterial_spot": 4064,
+      "cercospora_leaf_spot": 1556,
+      "healthy": 1524,
+      "leaf_curl": 423,
+      "nutrient_deficiency": 444,
+      "powdery_mildew": 195
+    },
+    "status": "ready"
+  },
+  "training_rows_including_synthetic_views": 4938,
+  "grouping_basis_counts": {
+    "image_hash_only": 8206
+  },
+  "validation_per_model": {
+    "Logistic Regression": {
+      "accuracy": 0.9834457388105456,
+      "balanced_accuracy": 0.9819957563305136,
+      "classification_report": {
+        "bacterial_spot": {
+          "precision": 0.9924528301886792,
+          "recall": 0.9887218045112782,
+          "f1-score": 0.9905838041431262,
+          "support": 798.0
+        },
+        "cercospora_leaf_spot": {
+          "precision": 0.9903225806451613,
+          "recall": 0.9715189873417721,
+          "f1-score": 0.9808306709265175,
+          "support": 316.0
+        },
+        "healthy": {
+          "precision": 0.9644012944983819,
+          "recall": 0.9802631578947368,
+          "f1-score": 0.9722675367047309,
+          "support": 304.0
+        },
+        "leaf_curl": {
+          "precision": 1.0,
+          "recall": 0.9764705882352941,
+          "f1-score": 0.9880952380952381,
+          "support": 85.0
+        },
+        "nutrient_deficiency": {
+          "precision": 0.9565217391304348,
+          "recall": 1.0,
+          "f1-score": 0.9777777777777777,
+          "support": 88.0
+        },
+        "powdery_mildew": {
+          "precision": 0.9285714285714286,
+          "recall": 0.975,
+          "f1-score": 0.9512195121951219,
+          "support": 40.0
+        },
+        "accuracy": 0.9834457388105456,
+        "macro avg": {
+          "precision": 0.9720449788390143,
+          "recall": 0.9819957563305136,
+          "f1-score": 0.9767957566404187,
+          "support": 1631.0
+        },
+        "weighted avg": {
+          "precision": 0.9836996061853345,
+          "recall": 0.9834457388105456,
+          "f1-score": 0.9834941870310097,
+          "support": 1631.0
+        }
+      },
+      "confusion_matrix": [
+        [
+          789,
+          2,
+          7,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          307,
+          4,
+          0,
+          4,
+          0
+        ],
+        [
+          4,
+          1,
+          298,
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          0,
+          83,
+          0,
+          2
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          88,
+          0
+        ],
+        [
+          1,
+          0,
+          0,
+          0,
+          0,
+          39
+        ]
+      ]
+    },
+    "Linear Discriminant Analysis": {
+      "accuracy": 0.9429797670141018,
+      "balanced_accuracy": 0.9463025003674375,
+      "classification_report": {
+        "bacterial_spot": {
+          "precision": 0.9357575757575758,
+          "recall": 0.9674185463659147,
+          "f1-score": 0.9513247073321011,
+          "support": 798.0
+        },
+        "cercospora_leaf_spot": {
+          "precision": 1.0,
+          "recall": 0.9556962025316456,
+          "f1-score": 0.9773462783171522,
+          "support": 316.0
+        },
+        "healthy": {
+          "precision": 0.8896551724137931,
+          "recall": 0.8486842105263158,
+          "f1-score": 0.8686868686868687,
+          "support": 304.0
+        },
+        "leaf_curl": {
+          "precision": 0.9651162790697675,
+          "recall": 0.9764705882352941,
+          "f1-score": 0.9707602339181286,
+          "support": 85.0
+        },
+        "nutrient_deficiency": {
+          "precision": 0.9767441860465116,
+          "recall": 0.9545454545454546,
+          "f1-score": 0.9655172413793104,
+          "support": 88.0
+        },
+        "powdery_mildew": {
+          "precision": 0.9285714285714286,
+          "recall": 0.975,
+          "f1-score": 0.9512195121951219,
+          "support": 40.0
+        },
+        "accuracy": 0.9429797670141018,
+        "macro avg": {
+          "precision": 0.9493074403098462,
+          "recall": 0.9463025003674375,
+          "f1-score": 0.9474758069714472,
+          "support": 1631.0
+        },
+        "weighted avg": {
+          "precision": 0.9431765463545181,
+          "recall": 0.9429797670141018,
+          "f1-score": 0.9427395868131637,
+          "support": 1631.0
+        }
+      },
+      "confusion_matrix": [
+        [
+          772,
+          0,
+          26,
+          0,
+          0,
+          0
+        ],
+        [
+          5,
+          302,
+          6,
+          0,
+          2,
+          1
+        ],
+        [
+          45,
+          0,
+          258,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          83,
+          0,
+          2
+        ],
+        [
+          2,
+          0,
+          0,
+          2,
+          84,
+          0
+        ],
+        [
+          1,
+          0,
+          0,
+          0,
+          0,
+          39
+        ]
+      ]
+    },
+    "K-Nearest Neighbors": {
+      "accuracy": 0.9724095646842428,
+      "balanced_accuracy": 0.9606899088749424,
+      "classification_report": {
+        "bacterial_spot": {
+          "precision": 0.9671532846715328,
+          "recall": 0.9962406015037594,
+          "f1-score": 0.9814814814814815,
+          "support": 798.0
+        },
+        "cercospora_leaf_spot": {
+          "precision": 0.9838709677419355,
+          "recall": 0.9651898734177216,
+          "f1-score": 0.9744408945686901,
+          "support": 316.0
+        },
+        "healthy": {
+          "precision": 0.9823321554770318,
+          "recall": 0.9144736842105263,
+          "f1-score": 0.9471890971039182,
+          "support": 304.0
+        },
+        "leaf_curl": {
+          "precision": 0.9882352941176471,
+          "recall": 0.9882352941176471,
+          "f1-score": 0.9882352941176471,
+          "support": 85.0
+        },
+        "nutrient_deficiency": {
+          "precision": 0.946236559139785,
+          "recall": 1.0,
+          "f1-score": 0.9723756906077348,
+          "support": 88.0
+        },
+        "powdery_mildew": {
+          "precision": 0.9473684210526315,
+          "recall": 0.9,
+          "f1-score": 0.9230769230769231,
+          "support": 40.0
+        },
+        "accuracy": 0.9724095646842428,
+        "macro avg": {
+          "precision": 0.9691994470334273,
+          "recall": 0.9606899088749424,
+          "f1-score": 0.9644665634927324,
+          "support": 1631.0
+        },
+        "weighted avg": {
+          "precision": 0.9727063619164678,
+          "recall": 0.9724095646842428,
+          "f1-score": 0.9721539963961232,
+          "support": 1631.0
+        }
+      },
+      "confusion_matrix": [
+        [
+          795,
+          0,
+          3,
+          0,
+          0,
+          0
+        ],
+        [
+          6,
+          305,
+          2,
+          0,
+          2,
+          1
+        ],
+        [
+          19,
+          5,
+          278,
+          1,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          84,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          88,
+          0
+        ],
+        [
+          2,
+          0,
+          0,
+          0,
+          2,
+          36
+        ]
+      ]
+    },
+    "Decision Tree": {
+      "accuracy": 0.9632127529123238,
+      "balanced_accuracy": 0.9402846557434673,
+      "classification_report": {
+        "bacterial_spot": {
+          "precision": 0.9785894206549118,
+          "recall": 0.9736842105263158,
+          "f1-score": 0.9761306532663316,
+          "support": 798.0
+        },
+        "cercospora_leaf_spot": {
+          "precision": 0.9776357827476039,
+          "recall": 0.9683544303797469,
+          "f1-score": 0.972972972972973,
+          "support": 316.0
+        },
+        "healthy": {
+          "precision": 0.9265175718849841,
+          "recall": 0.9539473684210527,
+          "f1-score": 0.940032414910859,
+          "support": 304.0
+        },
+        "leaf_curl": {
+          "precision": 0.9302325581395349,
+          "recall": 0.9411764705882353,
+          "f1-score": 0.935672514619883,
+          "support": 85.0
+        },
+        "nutrient_deficiency": {
+          "precision": 0.9438202247191011,
+          "recall": 0.9545454545454546,
+          "f1-score": 0.9491525423728814,
+          "support": 88.0
+        },
+        "powdery_mildew": {
+          "precision": 0.9444444444444444,
+          "recall": 0.85,
+          "f1-score": 0.8947368421052632,
+          "support": 40.0
+        },
+        "accuracy": 0.9632127529123238,
+        "macro avg": {
+          "precision": 0.9502066670984299,
+          "recall": 0.9402846557434673,
+          "f1-score": 0.9447829900413652,
+          "support": 1631.0
+        },
+        "weighted avg": {
+          "precision": 0.9634655621574597,
+          "recall": 0.9632127529123238,
+          "f1-score": 0.9632303102725981,
+          "support": 1631.0
+        }
+      },
+      "confusion_matrix": [
+        [
+          777,
+          2,
+          19,
+          0,
+          0,
+          0
+        ],
+        [
+          5,
+          306,
+          4,
+          0,
+          1,
+          0
+        ],
+        [
+          7,
+          2,
+          290,
+          3,
+          1,
+          1
+        ],
+        [
+          2,
+          1,
+          0,
+          80,
+          1,
+          1
+        ],
+        [
+          0,
+          1,
+          0,
+          3,
+          84,
+          0
+        ],
+        [
+          3,
+          1,
+          0,
+          0,
+          2,
+          34
+        ]
+      ]
+    },
+    "Random Forest": {
+      "accuracy": 0.9908031882280809,
+      "balanced_accuracy": 0.9924625763030063,
+      "classification_report": {
+        "bacterial_spot": {
+          "precision": 0.9937264742785445,
+          "recall": 0.9924812030075187,
+          "f1-score": 0.993103448275862,
+          "support": 798.0
+        },
+        "cercospora_leaf_spot": {
+          "precision": 0.9936507936507937,
+          "recall": 0.990506329113924,
+          "f1-score": 0.9920760697305864,
+          "support": 316.0
+        },
+        "healthy": {
+          "precision": 0.980327868852459,
+          "recall": 0.9835526315789473,
+          "f1-score": 0.9819376026272578,
+          "support": 304.0
+        },
+        "leaf_curl": {
+          "precision": 0.9882352941176471,
+          "recall": 0.9882352941176471,
+          "f1-score": 0.9882352941176471,
+          "support": 85.0
+        },
+        "nutrient_deficiency": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 88.0
+        },
+        "powdery_mildew": {
+          "precision": 0.975609756097561,
+          "recall": 1.0,
+          "f1-score": 0.9876543209876543,
+          "support": 40.0
+        },
+        "accuracy": 0.9908031882280809,
+        "macro avg": {
+          "precision": 0.9885916978328342,
+          "recall": 0.9924625763030063,
+          "f1-score": 0.9905011226231678,
+          "support": 1631.0
+        },
+        "weighted avg": {
+          "precision": 0.9908224645266581,
+          "recall": 0.9908031882280809,
+          "f1-score": 0.9908079667671342,
+          "support": 1631.0
+        }
+      },
+      "confusion_matrix": [
+        [
+          792,
+          1,
+          5,
+          0,
+          0,
+          0
+        ],
+        [
+          2,
+          313,
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          3,
+          1,
+          299,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          84,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          88,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          40
+        ]
+      ]
+    },
+    "Gaussian Naive Bayes": {
+      "accuracy": 0.7106069895769467,
+      "balanced_accuracy": 0.6956687997408401,
+      "classification_report": {
+        "bacterial_spot": {
+          "precision": 0.6805194805194805,
+          "recall": 0.9849624060150376,
+          "f1-score": 0.804915514592934,
+          "support": 798.0
+        },
+        "cercospora_leaf_spot": {
+          "precision": 0.9280575539568345,
+          "recall": 0.40822784810126583,
+          "f1-score": 0.567032967032967,
+          "support": 316.0
+        },
+        "healthy": {
+          "precision": 0.8271604938271605,
+          "recall": 0.22039473684210525,
+          "f1-score": 0.34805194805194806,
+          "support": 304.0
+        },
+        "leaf_curl": {
+          "precision": 0.6814159292035398,
+          "recall": 0.9058823529411765,
+          "f1-score": 0.7777777777777778,
+          "support": 85.0
+        },
+        "nutrient_deficiency": {
+          "precision": 0.8732394366197183,
+          "recall": 0.7045454545454546,
+          "f1-score": 0.779874213836478,
+          "support": 88.0
+        },
+        "powdery_mildew": {
+          "precision": 0.5277777777777778,
+          "recall": 0.95,
+          "f1-score": 0.6785714285714286,
+          "support": 40.0
+        },
+        "accuracy": 0.7106069895769467,
+        "macro avg": {
+          "precision": 0.7530284453174185,
+          "recall": 0.6956687997408401,
+          "f1-score": 0.6593706416439223,
+          "support": 1631.0
+        },
+        "weighted avg": {
+          "precision": 0.7625101521424335,
+          "recall": 0.7106069895769467,
+          "f1-score": 0.6678085159454011,
+          "support": 1631.0
+        }
+      },
+      "confusion_matrix": [
+        [
+          786,
+          3,
+          8,
+          0,
+          1,
+          0
+        ],
+        [
+          143,
+          129,
+          2,
+          16,
+          5,
+          21
+        ],
+        [
+          226,
+          7,
+          67,
+          1,
+          0,
+          3
+        ],
+        [
+          0,
+          0,
+          2,
+          77,
+          3,
+          3
+        ],
+        [
+          0,
+          0,
+          0,
+          19,
+          62,
+          7
+        ],
+        [
+          0,
+          0,
+          2,
+          0,
+          0,
+          38
+        ]
+      ]
+    },
+    "Support Vector Machine": {
+      "accuracy": 0.9822194972409565,
+      "balanced_accuracy": 0.9689064359012337,
+      "classification_report": {
+        "bacterial_spot": {
+          "precision": 0.9962121212121212,
+          "recall": 0.9887218045112782,
+          "f1-score": 0.9924528301886792,
+          "support": 798.0
+        },
+        "cercospora_leaf_spot": {
+          "precision": 0.9487951807228916,
+          "recall": 0.9968354430379747,
+          "f1-score": 0.9722222222222222,
+          "support": 316.0
+        },
+        "healthy": {
+          "precision": 0.9735973597359736,
+          "recall": 0.9703947368421053,
+          "f1-score": 0.9719934102141681,
+          "support": 304.0
+        },
+        "leaf_curl": {
+          "precision": 1.0,
+          "recall": 0.9529411764705882,
+          "f1-score": 0.9759036144578314,
+          "support": 85.0
+        },
+        "nutrient_deficiency": {
+          "precision": 1.0,
+          "recall": 0.9545454545454546,
+          "f1-score": 0.9767441860465116,
+          "support": 88.0
+        },
+        "powdery_mildew": {
+          "precision": 0.9743589743589743,
+          "recall": 0.95,
+          "f1-score": 0.9620253164556962,
+          "support": 40.0
+        },
+        "accuracy": 0.9822194972409565,
+        "macro avg": {
+          "precision": 0.9821606060049936,
+          "recall": 0.9689064359012337,
+          "f1-score": 0.9752235965975181,
+          "support": 1631.0
+        },
+        "weighted avg": {
+          "precision": 0.9826759694480696,
+          "recall": 0.9822194972409565,
+          "f1-score": 0.982263571843735,
+          "support": 1631.0
+        }
+      },
+      "confusion_matrix": [
+        [
+          789,
+          1,
+          8,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          315,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          2,
+          7,
+          295,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          3,
+          0,
+          81,
+          0,
+          1
+        ],
+        [
+          0,
+          4,
+          0,
+          0,
+          84,
+          0
+        ],
+        [
+          0,
+          2,
+          0,
+          0,
+          0,
+          38
+        ]
+      ]
+    }
+  },
+  "test_per_model": {
+    "Logistic Regression": {
+      "accuracy": 0.9786063569682152,
+      "balanced_accuracy": 0.9806345295789223,
+      "classification_report": {
+        "bacterial_spot": {
+          "precision": 0.9876237623762376,
+          "recall": 0.9839704069050554,
+          "f1-score": 0.9857936998147004,
+          "support": 811.0
+        },
+        "cercospora_leaf_spot": {
+          "precision": 0.9780564263322884,
+          "recall": 0.9904761904761905,
+          "f1-score": 0.9842271293375394,
+          "support": 315.0
+        },
+        "healthy": {
+          "precision": 0.9655172413793104,
+          "recall": 0.9459459459459459,
+          "f1-score": 0.9556313993174061,
+          "support": 296.0
+        },
+        "leaf_curl": {
+          "precision": 1.0,
+          "recall": 0.9634146341463414,
+          "f1-score": 0.9813664596273292,
+          "support": 82.0
+        },
+        "nutrient_deficiency": {
+          "precision": 0.9595959595959596,
+          "recall": 1.0,
+          "f1-score": 0.979381443298969,
+          "support": 95.0
+        },
+        "powdery_mildew": {
+          "precision": 0.9024390243902439,
+          "recall": 1.0,
+          "f1-score": 0.9487179487179487,
+          "support": 37.0
+        },
+        "accuracy": 0.9786063569682152,
+        "macro avg": {
+          "precision": 0.9655387356790066,
+          "recall": 0.9806345295789223,
+          "f1-score": 0.9725196800189821,
+          "support": 1636.0
+        },
+        "weighted avg": {
+          "precision": 0.9788481718179283,
+          "recall": 0.9786063569682152,
+          "f1-score": 0.9786020668669967,
+          "support": 1636.0
+        }
+      },
+      "confusion_matrix": [
+        [
+          798,
+          3,
+          10,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          312,
+          0,
+          0,
+          3,
+          0
+        ],
+        [
+          9,
+          4,
+          280,
+          0,
+          1,
+          2
+        ],
+        [
+          1,
+          0,
+          0,
+          79,
+          0,
+          2
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          95,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          37
+        ]
+      ]
+    },
+    "Linear Discriminant Analysis": {
+      "accuracy": 0.9321515892420538,
+      "balanced_accuracy": 0.9429894856224338,
+      "classification_report": {
+        "bacterial_spot": {
+          "precision": 0.9282296650717703,
+          "recall": 0.9568434032059187,
+          "f1-score": 0.9423193685488768,
+          "support": 811.0
+        },
+        "cercospora_leaf_spot": {
+          "precision": 0.9932659932659933,
+          "recall": 0.9365079365079365,
+          "f1-score": 0.9640522875816994,
+          "support": 315.0
+        },
+        "healthy": {
+          "precision": 0.8661971830985915,
+          "recall": 0.831081081081081,
+          "f1-score": 0.8482758620689655,
+          "support": 296.0
+        },
+        "leaf_curl": {
+          "precision": 0.9523809523809523,
+          "recall": 0.975609756097561,
+          "f1-score": 0.963855421686747,
+          "support": 82.0
+        },
+        "nutrient_deficiency": {
+          "precision": 0.9479166666666666,
+          "recall": 0.9578947368421052,
+          "f1-score": 0.9528795811518325,
+          "support": 95.0
+        },
+        "powdery_mildew": {
+          "precision": 0.9487179487179487,
+          "recall": 1.0,
+          "f1-score": 0.9736842105263158,
+          "support": 37.0
+        },
+        "accuracy": 0.9321515892420538,
+        "macro avg": {
+          "precision": 0.9394514015336539,
+          "recall": 0.9429894856224338,
+          "f1-score": 0.9408444552607396,
+          "support": 1636.0
+        },
+        "weighted avg": {
+          "precision": 0.9323455366627824,
+          "recall": 0.9321515892420538,
+          "f1-score": 0.9318906810702928,
+          "support": 1636.0
+        }
+      },
+      "confusion_matrix": [
+        [
+          776,
+          0,
+          34,
+          1,
+          0,
+          0
+        ],
+        [
+          10,
+          295,
+          4,
+          1,
+          5,
+          0
+        ],
+        [
+          47,
+          2,
+          246,
+          0,
+          0,
+          1
+        ],
+        [
+          1,
+          0,
+          0,
+          80,
+          0,
+          1
+        ],
+        [
+          2,
+          0,
+          0,
+          2,
+          91,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          37
+        ]
+      ]
+    },
+    "K-Nearest Neighbors": {
+      "accuracy": 0.9706601466992665,
+      "balanced_accuracy": 0.965952971865299,
+      "classification_report": {
+        "bacterial_spot": {
+          "precision": 0.9721212121212122,
+          "recall": 0.9889025893958077,
+          "f1-score": 0.980440097799511,
+          "support": 811.0
+        },
+        "cercospora_leaf_spot": {
+          "precision": 0.9839228295819936,
+          "recall": 0.9714285714285714,
+          "f1-score": 0.9776357827476039,
+          "support": 315.0
+        },
+        "healthy": {
+          "precision": 0.9608540925266904,
+          "recall": 0.9121621621621622,
+          "f1-score": 0.9358752166377816,
+          "support": 296.0
+        },
+        "leaf_curl": {
+          "precision": 0.9418604651162791,
+          "recall": 0.9878048780487805,
+          "f1-score": 0.9642857142857143,
+          "support": 82.0
+        },
+        "nutrient_deficiency": {
+          "precision": 0.9690721649484536,
+          "recall": 0.9894736842105263,
+          "f1-score": 0.9791666666666666,
+          "support": 95.0
+        },
+        "powdery_mildew": {
+          "precision": 0.9722222222222222,
+          "recall": 0.9459459459459459,
+          "f1-score": 0.958904109589041,
+          "support": 37.0
+        },
+        "accuracy": 0.9706601466992665,
+        "macro avg": {
+          "precision": 0.9666754977528086,
+          "recall": 0.965952971865299,
+          "f1-score": 0.9660512646210532,
+          "support": 1636.0
+        },
+        "weighted avg": {
+          "precision": 0.9706634729635644,
+          "recall": 0.9706601466992665,
+          "f1-score": 0.9704663624481898,
+          "support": 1636.0
+        }
+      },
+      "confusion_matrix": [
+        [
+          802,
+          2,
+          7,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          306,
+          4,
+          2,
+          3,
+          0
+        ],
+        [
+          22,
+          3,
+          270,
+          0,
+          0,
+          1
+        ],
+        [
+          1,
+          0,
+          0,
+          81,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          1,
+          94,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          2,
+          0,
+          35
+        ]
+      ]
+    },
+    "Decision Tree": {
+      "accuracy": 0.960880195599022,
+      "balanced_accuracy": 0.9330315305609479,
+      "classification_report": {
+        "bacterial_spot": {
+          "precision": 0.9814814814814815,
+          "recall": 0.9802712700369913,
+          "f1-score": 0.9808760024676126,
+          "support": 811.0
+        },
+        "cercospora_leaf_spot": {
+          "precision": 0.9551282051282052,
+          "recall": 0.946031746031746,
+          "f1-score": 0.9505582137161085,
+          "support": 315.0
+        },
+        "healthy": {
+          "precision": 0.9461279461279462,
+          "recall": 0.9493243243243243,
+          "f1-score": 0.9477234401349073,
+          "support": 296.0
+        },
+        "leaf_curl": {
+          "precision": 0.95,
+          "recall": 0.926829268292683,
+          "f1-score": 0.9382716049382716,
+          "support": 82.0
+        },
+        "nutrient_deficiency": {
+          "precision": 0.883495145631068,
+          "recall": 0.9578947368421052,
+          "f1-score": 0.9191919191919192,
+          "support": 95.0
+        },
+        "powdery_mildew": {
+          "precision": 0.9117647058823529,
+          "recall": 0.8378378378378378,
+          "f1-score": 0.8732394366197183,
+          "support": 37.0
+        },
+        "accuracy": 0.960880195599022,
+        "macro avg": {
+          "precision": 0.937999580708509,
+          "recall": 0.9330315305609479,
+          "f1-score": 0.9349767695114228,
+          "support": 1636.0
+        },
+        "weighted avg": {
+          "precision": 0.9611663026304015,
+          "recall": 0.960880195599022,
+          "f1-score": 0.9608886165555262,
+          "support": 1636.0
+        }
+      },
+      "confusion_matrix": [
+        [
+          795,
+          6,
+          9,
+          0,
+          0,
+          1
+        ],
+        [
+          5,
+          298,
+          7,
+          1,
+          3,
+          1
+        ],
+        [
+          7,
+          4,
+          281,
+          2,
+          2,
+          0
+        ],
+        [
+          2,
+          0,
+          0,
+          76,
+          3,
+          1
+        ],
+        [
+          0,
+          3,
+          0,
+          1,
+          91,
+          0
+        ],
+        [
+          1,
+          1,
+          0,
+          0,
+          4,
+          31
+        ]
+      ]
+    },
+    "Random Forest": {
+      "accuracy": 0.9938875305623472,
+      "balanced_accuracy": 0.9943640964783187,
+      "classification_report": {
+        "bacterial_spot": {
+          "precision": 0.9975278121137207,
+          "recall": 0.9950678175092479,
+          "f1-score": 0.9962962962962963,
+          "support": 811.0
+        },
+        "cercospora_leaf_spot": {
+          "precision": 0.9968253968253968,
+          "recall": 0.9968253968253968,
+          "f1-score": 0.9968253968253968,
+          "support": 315.0
+        },
+        "healthy": {
+          "precision": 0.9898305084745763,
+          "recall": 0.9864864864864865,
+          "f1-score": 0.988155668358714,
+          "support": 296.0
+        },
+        "leaf_curl": {
+          "precision": 0.9878048780487805,
+          "recall": 0.9878048780487805,
+          "f1-score": 0.9878048780487805,
+          "support": 82.0
+        },
+        "nutrient_deficiency": {
+          "precision": 0.979381443298969,
+          "recall": 1.0,
+          "f1-score": 0.9895833333333334,
+          "support": 95.0
+        },
+        "powdery_mildew": {
+          "precision": 0.9736842105263158,
+          "recall": 1.0,
+          "f1-score": 0.9866666666666667,
+          "support": 37.0
+        },
+        "accuracy": 0.9938875305623472,
+        "macro avg": {
+          "precision": 0.9875090415479598,
+          "recall": 0.9943640964783187,
+          "f1-score": 0.9908887065881978,
+          "support": 1636.0
+        },
+        "weighted avg": {
+          "precision": 0.9939195837625782,
+          "recall": 0.9938875305623472,
+          "f1-score": 0.9938920889143087,
+          "support": 1636.0
+        }
+      },
+      "confusion_matrix": [
+        [
+          807,
+          1,
+          3,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          314,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          292,
+          1,
+          1,
+          1
+        ],
+        [
+          0,
+          0,
+          0,
+          81,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          95,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          37
+        ]
+      ]
+    },
+    "Gaussian Naive Bayes": {
+      "accuracy": 0.7224938875305623,
+      "balanced_accuracy": 0.6902072554594482,
+      "classification_report": {
+        "bacterial_spot": {
+          "precision": 0.6994773519163763,
+          "recall": 0.9901356350184957,
+          "f1-score": 0.819806023481368,
+          "support": 811.0
+        },
+        "cercospora_leaf_spot": {
+          "precision": 0.8972602739726028,
+          "recall": 0.4158730158730159,
+          "f1-score": 0.5683297180043384,
+          "support": 315.0
+        },
+        "healthy": {
+          "precision": 0.8690476190476191,
+          "recall": 0.24662162162162163,
+          "f1-score": 0.38421052631578945,
+          "support": 296.0
+        },
+        "leaf_curl": {
+          "precision": 0.6454545454545455,
+          "recall": 0.8658536585365854,
+          "f1-score": 0.7395833333333334,
+          "support": 82.0
+        },
+        "nutrient_deficiency": {
+          "precision": 0.8780487804878049,
+          "recall": 0.7578947368421053,
+          "f1-score": 0.8135593220338984,
+          "support": 95.0
+        },
+        "powdery_mildew": {
+          "precision": 0.48484848484848486,
+          "recall": 0.8648648648648649,
+          "f1-score": 0.6213592233009708,
+          "support": 37.0
+        },
+        "accuracy": 0.7224938875305623,
+        "macro avg": {
+          "precision": 0.7456895092879056,
+          "recall": 0.6902072554594482,
+          "f1-score": 0.6578080244116165,
+          "support": 1636.0
+        },
+        "weighted avg": {
+          "precision": 0.771046769411158,
+          "recall": 0.7224938875305623,
+          "f1-score": 0.6837023974284349,
+          "support": 1636.0
+        }
+      },
+      "confusion_matrix": [
+        [
+          803,
+          3,
+          2,
+          0,
+          2,
+          1
+        ],
+        [
+          134,
+          131,
+          1,
+          19,
+          6,
+          24
+        ],
+        [
+          211,
+          10,
+          73,
+          1,
+          0,
+          1
+        ],
+        [
+          0,
+          1,
+          4,
+          71,
+          2,
+          4
+        ],
+        [
+          0,
+          1,
+          0,
+          18,
+          72,
+          4
+        ],
+        [
+          0,
+          0,
+          4,
+          1,
+          0,
+          32
+        ]
+      ]
+    },
+    "Support Vector Machine": {
+      "accuracy": 0.9810513447432763,
+      "balanced_accuracy": 0.9703255157236953,
+      "classification_report": {
+        "bacterial_spot": {
+          "precision": 0.9950124688279302,
+          "recall": 0.9839704069050554,
+          "f1-score": 0.9894606323620583,
+          "support": 811.0
+        },
+        "cercospora_leaf_spot": {
+          "precision": 0.9545454545454546,
+          "recall": 1.0,
+          "f1-score": 0.9767441860465116,
+          "support": 315.0
+        },
+        "healthy": {
+          "precision": 0.9595959595959596,
+          "recall": 0.9628378378378378,
+          "f1-score": 0.9612141652613828,
+          "support": 296.0
+        },
+        "leaf_curl": {
+          "precision": 1.0,
+          "recall": 0.9878048780487805,
+          "f1-score": 0.9938650306748467,
+          "support": 82.0
+        },
+        "nutrient_deficiency": {
+          "precision": 1.0,
+          "recall": 0.968421052631579,
+          "f1-score": 0.983957219251337,
+          "support": 95.0
+        },
+        "powdery_mildew": {
+          "precision": 1.0,
+          "recall": 0.918918918918919,
+          "f1-score": 0.9577464788732394,
+          "support": 37.0
+        },
+        "accuracy": 0.9810513447432763,
+        "macro avg": {
+          "precision": 0.9848589804948907,
+          "recall": 0.9703255157236953,
+          "f1-score": 0.9771646187448959,
+          "support": 1636.0
+        },
+        "weighted avg": {
+          "precision": 0.9814653633506564,
+          "recall": 0.9810513447432763,
+          "f1-score": 0.981085496595461,
+          "support": 1636.0
+        }
+      },
+      "confusion_matrix": [
+        [
+          798,
+          1,
+          12,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          315,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          4,
+          7,
+          285,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          81,
+          0,
+          0
+        ],
+        [
+          0,
+          3,
+          0,
+          0,
+          92,
+          0
+        ],
+        [
+          0,
+          3,
+          0,
+          0,
+          0,
+          34
+        ]
+      ]
+    }
+  },
+  "test_total": 1636,
+  "test_accepted": 1636,
+  "test_coverage": 1.0,
+  "ensemble_decided": 1629,
+  "ensemble_decision_coverage_on_accepted": 0.9957212713936431,
+  "test_accuracy_on_accepted": 0.9938875305623472,
+  "test_accuracy_counting_rejections_as_errors": 0.9938875305623472,
+  "ensemble_accuracy_on_decided": 0.9895641497851443,
+  "ensemble_accuracy_counting_rejections_and_abstentions_as_errors": 0.9853300733496333,
+  "test_balanced_accuracy": 0.9943640964783187,
+  "image_level_wilson_95": [
+    0.988784554618914,
+    0.9966764801542007
+  ],
+  "ci_note": "Image-level interval; correlated photos reduce effective sample size.",
+  "classification_report": {
+    "bacterial_spot": {
+      "precision": 0.9975278121137207,
+      "recall": 0.9950678175092479,
+      "f1-score": 0.9962962962962963,
+      "support": 811.0
+    },
+    "cercospora_leaf_spot": {
+      "precision": 0.9968253968253968,
+      "recall": 0.9968253968253968,
+      "f1-score": 0.9968253968253968,
+      "support": 315.0
+    },
+    "healthy": {
+      "precision": 0.9898305084745763,
+      "recall": 0.9864864864864865,
+      "f1-score": 0.988155668358714,
+      "support": 296.0
+    },
+    "leaf_curl": {
+      "precision": 0.9878048780487805,
+      "recall": 0.9878048780487805,
+      "f1-score": 0.9878048780487805,
+      "support": 82.0
+    },
+    "nutrient_deficiency": {
+      "precision": 0.979381443298969,
+      "recall": 1.0,
+      "f1-score": 0.9895833333333334,
+      "support": 95.0
+    },
+    "powdery_mildew": {
+      "precision": 0.9736842105263158,
+      "recall": 1.0,
+      "f1-score": 0.9866666666666667,
+      "support": 37.0
+    },
+    "accuracy": 0.9938875305623472,
+    "macro avg": {
+      "precision": 0.9875090415479598,
+      "recall": 0.9943640964783187,
+      "f1-score": 0.9908887065881978,
+      "support": 1636.0
+    },
+    "weighted avg": {
+      "precision": 0.9939195837625782,
+      "recall": 0.9938875305623472,
+      "f1-score": 0.9938920889143087,
+      "support": 1636.0
+    }
+  },
+  "confusion_matrix": [
+    [
+      807,
+      1,
+      3,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      1,
+      314,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      1,
+      0,
+      292,
+      1,
+      1,
+      1,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      81,
+      1,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      95,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      37,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  ],
+  "data_note": "mendeley_bell_6; conflicting exact duplicates excluded; external field evaluation pending",
+  "limitations": "Internal comparison only. Hashes do not prove independence. Disease names are restricted to trained labels. Field accuracy is unmeasured."
+}

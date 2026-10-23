@@ -1,0 +1,27 @@
+{
+  "conflict_policy": "exclude",
+  "readable_files_before_cleanup": 9283,
+  "unreadable_files": 0,
+  "conflicting_image_groups": 16,
+  "conflicting_files_detected": 48,
+  "conflicting_files_excluded": 48,
+  "counts_before_cleanup": {
+    "bacterial_spot": 4901,
+    "cercospora_leaf_spot": 1796,
+    "healthy": 1524,
+    "leaf_curl": 423,
+    "nutrient_deficiency": 444,
+    "powdery_mildew": 195
+  },
+  "same_label_duplicate_copies_removed": 1029,
+  "retained_unique_images": 8206,
+  "counts_after_cleanup": {
+    "bacterial_spot": 4064,
+    "cercospora_leaf_spot": 1556,
+    "healthy": 1524,
+    "leaf_curl": 423,
+    "nutrient_deficiency": 444,
+    "powdery_mildew": 195
+  },
+  "status": "ready"
+}
