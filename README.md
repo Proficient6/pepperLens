@@ -1,6 +1,6 @@
 # PepperLens — bell pepper leaf classification through DSP
 
-The final project consists of the self-contained Colab training notebook, the local website, and your actual six-class / seven-classifier trained model. You do not need to retrain before using the website.
+The final project consists of the self-contained Colab training notebook, the local website, actual six-class / seven-classifier trained model. You do not need to retrain before using the website.
 
 PepperLens uses digital image processing to turn bell pepper leaf photographs into colour, texture and shape descriptors, then compares seven classical classifiers. Its browser interface supports image upload, processing-stage inspection and the complete saved training report. The saved main model is Random Forest, selected on validation balanced accuracy.
 
@@ -172,46 +172,3 @@ Other failures have different meanings:
 
 New photographs are the intended use of the classifier. However, outdoor backgrounds, shadows, camera differences, multiple leaves, severe colour changes and untrained diseases can reduce performance or break heuristic segmentation. The classifier can assign a known class even to unfamiliar input. A technical fix does not establish field accuracy. Collect independently labelled photographs, inspect their masks, report per-class errors/recall, and use that evidence to decide whether segmentation, training diversity or score calibration needs improvement. Keep a fresh final test set after further model development.
 
-## Put this project on GitHub
-
-1. Sign in to GitHub and create an empty repository, for example `bell-pepper-dsp`. Do not prefill another README or `.gitignore` for this first push.
-2. Open PowerShell in this project folder using the Quick start instructions. Check `git --version`. Git is already initialized in the original project folder; for an extracted copy without `.git`, run `git init` once.
-3. Run the following commands, replacing `YOUR_USERNAME` with your GitHub account. Authenticate through Git/GitHub's normal prompt if requested. The repository name must match the empty repository you created.
-
-```powershell
-git status
-git add .
-git commit -m "Add PepperLens DSP project and trained model"
-git branch -M main
-git remote add origin https://github.com/YOUR_USERNAME/bell-pepper-dsp.git
-git push -u origin main
-```
-
-Before adding a remote, inspect `git remote -v`. If `origin` already points to your intended repository, skip `git remote add`. Use `git add`, `git commit` and `git push` for subsequent changes.
-
-If Git reports **Author identity unknown**, set the identity you want on your commits, then retry the commit. Use your real details or the GitHub-provided no-reply email shown in your account's email settings:
-
-```powershell
-git config user.name "Your Name"
-git config user.email "YOUR_COMMIT_EMAIL"
-```
-
-The included `.gitignore` excludes local Python environments, generated caches/screenshots/logs, downloaded ZIPs, old dataset/model-cache folders and `.env` secrets. It deliberately **keeps** the final notebook, current `.joblib` model, original reports and training plots. Review `git status` after `git add .` before committing.
-
-Include the final notebook, source, launcher, this guide and `website/trained_run`. The `.gitignore` excludes environments, caches, runtime files and `.env` credentials. Do not upload a training dataset. Retain the dataset citation above. The current joblib model is approximately 48 MB: use Git commands because GitHub's browser upload limit is 25 MiB; ordinary Git rejects individual files above 100 MiB. Consider a release artifact or LFS if future models grow, and ensure a host downloads the actual model rather than an LFS pointer.
-
-Sources: [GitHub's existing-project push guide](https://docs.github.com/en/migrations/importing-source-code/using-the-command-line-to-import-source-code/adding-locally-hosted-code-to-github), [GitHub file-size limits](https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-large-files-on-github).
-
-## Host it later
-
-GitHub stores the project. **GitHub Pages alone cannot execute this Python/scikit-learn pipeline**; Pages serves static HTML/CSS/JavaScript. Keep the frontend and API on the same Python service for a straightforward first deployment. [GitHub Pages documentation](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages)
-
-The current `website/server.py` is a localhost development server, **not yet a production deployment entry point**. Before publishing:
-
-1. Add a production WSGI/ASGI adapter (for example Flask + Gunicorn) that reuses `PepperLens`, serves the existing frontend and preserves `/api/health`, `/api/training`, `/api/predict` and report routes. Python's `http.server` is not recommended for production. [Python documentation](https://docs.python.org/3/library/http.server.html)
-2. Test that adapter locally, including new leaves, malformed/oversized uploads, timeouts, concurrent requests and memory use. Keep the saved estimator's matching dependency versions.
-3. On Render, choose **New → Web Service**, connect the GitHub repository and select its branch. Use the repository root and Python 3.12 explicitly. Install `website/requirements-tested.txt` plus the chosen production adapter/server dependencies. [Render service setup](https://render.com/docs/web-services), [Python version configuration](https://render.com/docs/python-version)
-4. Set the start command to the **actual adapter**. For a future Flask module `website/wsgi.py` exposing `app`, a command would be `gunicorn website.wsgi:app --workers 1 --threads 2 --timeout 120 --bind 0.0.0.0:$PORT`. **That module is not implemented yet; this is not a working command for the current `server.py`.** Render requires `0.0.0.0` and the service's assigned port. [Render Flask deployment](https://render.com/docs/deploy-flask)
-5. Set the health-check path to `/api/health`, verify the real model is present, choose resources based on measured RAM/CPU, then deploy and repeat the upload tests using the HTTPS address. A 48 MB model file does not imply a 48 MB running application. The Windows `.cmd` launcher is not used on the host.
-
-No hosting account, paid plan or public deployment has been created. The above separates the steps you can do now (GitHub) from the backend preparation and hosted verification still needed later.
