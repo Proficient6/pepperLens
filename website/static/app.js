@@ -10,7 +10,11 @@ let training, selectedFile, previewURL, prediction, busy = false;
 let serverConnected = false, connectionCheck = null;
 const fileInput = $('#leaf-file');
 const dropZone = $('#drop-zone');
-const SERVER_HELP = 'Cannot reach the prediction server. Run Start-PepperLens.cmd, keep its terminal open, then click Check connection. Your photo is not rejected for being new.';
+const LOCAL_SITE = ['localhost','127.0.0.1','::1','[::1]'].includes(location.hostname);
+const RETRY_HELP = LOCAL_SITE
+  ? 'Run Start-PepperLens.cmd, keep its terminal open, then click Check connection.'
+  : 'The hosted service may be starting. Wait about a minute, then click Check connection. If this continues, contact the project owner.';
+const SERVER_HELP = `Cannot reach the prediction server. ${RETRY_HELP} Your photo is not rejected for being new.`;
 
 function setConnection(connected, message=SERVER_HELP) {
   serverConnected = connected;
@@ -29,14 +33,14 @@ async function requestJSON(path, options={}, timeout=10000) {
       response = await fetch(path,{...options,signal:controller.signal,cache:'no-store'});
     } catch(cause) {
       const error = new Error(cause.name==='AbortError'
-        ? 'The server did not respond in time. Check its terminal, then retry. A slow response is not a disease prediction.'
+        ? `The server did not respond in time. ${RETRY_HELP} A slow response is not a disease prediction.`
         : SERVER_HELP);
       error.connectionFailure = cause.name!=='AbortError';
       throw error;
     }
     let payload;
     try { payload = await response.json(); }
-    catch { throw new Error(`The server returned an incomplete or unreadable response (HTTP ${response.status}). Check its terminal and retry.`); }
+    catch { throw new Error(`The server returned an incomplete or unreadable response (HTTP ${response.status}). ${RETRY_HELP}`); }
     if (!response.ok) throw new Error(payload.error || `Analysis failed (HTTP ${response.status}).`);
     return payload;
   } finally { clearTimeout(timer); }
@@ -47,8 +51,8 @@ async function connectServer(refreshReport=false) {
   connectionCheck = (async()=>{
     $('#retry-connection').disabled = true;
     try {
-      const health = await requestJSON('/api/health',{},6000);
-      if (health.application!=='PepperLens' || health.status!=='ready') throw new Error('A different service is using this address. Start PepperLens on an available port.');
+      const health = await requestJSON('/api/health',{},LOCAL_SITE ? 6000 : 90000);
+      if (health.application!=='PepperLens' || health.status!=='ready') throw new Error('This address did not return the PepperLens health response.');
       if (!training || !serverConnected || refreshReport) {
         training = await requestJSON('/api/training');
         renderTraining(training);
@@ -56,7 +60,7 @@ async function connectServer(refreshReport=false) {
       setConnection(true);
       return true;
     } catch(error) {
-      setConnection(false,error.connectionFailure ? SERVER_HELP : `${error.message} Run Start-PepperLens.cmd and keep its terminal open.`);
+      setConnection(false,error.connectionFailure ? SERVER_HELP : error.message);
       return false;
     } finally { $('#retry-connection').disabled = false; }
   })();

@@ -54,12 +54,79 @@ def check_http(base, photo, expected, saved_report):
             assert not any(name.endswith('.joblib') for name in archive.namelist())
 
 
+def check_production(app, photo, expected, saved_report):
+    """Exercise the real WSGI routes and bounded concurrency without opening a port."""
+    from unittest.mock import patch
+    from server import MAX_UPLOAD
+    client = app.test_client()
+    health = client.get('/api/health')
+    assert health.json['mode'] == 'production' and health.json['status'] == 'ready'
+    assert health.headers['Cache-Control'] == 'no-store'
+    home = client.get('/')
+    assert home.status_code == 200 and b'Leaf lab' in home.data
+    assert "script-src 'self'" in home.headers['Content-Security-Policy']
+    for name in ('app.js', 'style.css', 'favicon.svg'):
+        assert client.get('/' + name).status_code == 200
+    report = client.get('/api/training').json
+    assert report['test_correct'] == saved_report['test_correct']
+    assert len(report['comparison']) == 7
+    assert client.get('/reports/dsp_processing_stages.png').data[:8] == b'\x89PNG\r\n\x1a\n'
+    # Real image through the production route, including a same-origin HTTPS upload.
+    response = client.post('/api/predict', data=photo, base_url='https://pepperlens.example',
+                           headers={'Origin': 'https://pepperlens.example'})
+    assert response.status_code == 200, response.json
+    assert response.json['overall']['prediction'] == expected
+    assert len(response.json['per_model']) == 7
+    assert len(response.json['stages']) == 15 and len(response.json['figures']) == 3
+    for path, body, headers, status in [
+        ('/api/predict', b'not an image', {}, 422),
+        ('/api/predict', b'', {}, 413),
+        ('/api/predict', b'x' * (MAX_UPLOAD + 1), {}, 413),
+        ('/api/predict', photo, {'Origin': 'https://elsewhere.invalid'}, 403),
+    ]:
+        response = client.post(path, data=body, headers=headers)
+        assert response.status_code == status, (path, response.status_code)
+        assert isinstance(response.json['error'], str)
+    for path in ('/reports/../pepper_models.joblib', '/reports/pepper_models.joblib',
+                 '/api/missing', '/wsgi.py'):
+        assert client.get(path).status_code == 404
+    assert client.get('/api/predict').status_code == 405
+    # During inference the health endpoint must stay responsive; no second decode starts.
+    slot = app.extensions['prediction_slot']
+    assert slot.acquire(blocking=False)
+    try:
+        assert client.get('/api/health').status_code == 200
+        response = client.post('/api/predict', data=photo)
+        assert response.status_code == 503 and response.headers['Retry-After'] == '5'
+    finally:
+        slot.release()
+    service = app.extensions['pepperlens']
+    with patch.object(service, 'analyze', side_effect=RuntimeError('private failure detail')), \
+         patch.object(app.logger, 'exception') as log_error:
+        response = client.post('/api/predict', data=photo)
+        assert response.status_code == 500
+        assert b'private failure detail' not in response.data
+        log_error.assert_called_once()
+    assert slot.acquire(blocking=False), 'Failed prediction must release the slot.'
+    slot.release()
+    assert client.get('/api/health').status_code == 200
+    with zipfile.ZipFile(io.BytesIO(client.get('/api/reports.zip').data)) as archive:
+        assert archive.testzip() is None and 'metrics.json' in archive.namelist()
+        assert not any(name.endswith('.joblib') for name in archive.namelist())
+
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--base-url')
+    parser.add_argument('--production', action='store_true', help='Check Flask routes, upload limits and concurrency.')
     parser.add_argument('--image', type=Path, help='Optional existing leaf photograph for a portable-copy test.')
     args = parser.parse_args()
-    application = PepperLens(ROOT / 'trained_run')
+    if args.production:
+        sys.path.insert(0, str(ROOT.parent))
+        from website.wsgi import app
+        application = app.extensions['pepperlens']
+    else:
+        application = PepperLens(ROOT / 'trained_run')
     assert len(application.bundle['models']) == 7 and len(application.bundle['classes']) == 6
     assert application.bundle['selected_model'] == 'Random Forest'
     assert application.report['test_correct'] == round(application.metrics['test_accuracy_on_accepted'] * application.metrics['test_accepted'])
@@ -104,8 +171,11 @@ if __name__ == '__main__':
             raise AssertionError('Invalid/blank input should be rejected.')
     if args.base_url:
         check_http(args.base_url.rstrip('/'), photo, expected, application.report)
+    if args.production:
+        check_production(app, photo, expected, application.report)
     summary = {'status':'passed', 'actual_saved_models':True, 'input_image':image_name,
-               'http_checks':bool(args.base_url), 'models':7, 'classes':6, 'new_image_stages':15,
+               'http_checks':bool(args.base_url), 'production_checks':args.production,
+               'models':7, 'classes':6, 'new_image_stages':15,
                'new_image_figures':3, 'dataset_downloads':False, 'test_correct':application.report['test_correct'],
                'test_total':application.metrics['test_total'], 'test_accuracy':application.metrics['test_accuracy_counting_rejections_as_errors']}
     (ROOT / 'runtime').mkdir(exist_ok=True)

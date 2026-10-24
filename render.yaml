@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: pepperlens
+    runtime: python
+    plan: free
+    branch: main
+    buildCommand: python -m pip install -r website/requirements-production.txt && python website/test_website.py --production
+    startCommand: gunicorn website.wsgi:app --bind 0.0.0.0:$PORT --worker-class gthread --workers 1 --threads 4 --timeout 120 --max-requests 200 --max-requests-jitter 20 --access-logfile - --error-logfile -
+    healthCheckPath: /api/health
+    envVars:
+      - key: MPLBACKEND
+        value: Agg
+      - key: MPLCONFIGDIR
+        value: /tmp/pepperlens-matplotlib
+      - key: OMP_NUM_THREADS
+        value: "1"
+      - key: OPENBLAS_NUM_THREADS
+        value: "1"
